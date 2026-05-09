@@ -1,0 +1,138 @@
+// "use client";
+
+// import { Button } from "@/components/ui/button";
+// import { 
+//   Dialog,
+//   DialogContent,
+//   DialogDescription,
+//   DialogHeader,
+//   DialogTitle,
+// } from "@/components/ui/dialog";
+// import React, { useState } from "react";
+
+
+
+
+
+// import { signInWithPopup } from 'firebase/auth';
+
+
+
+
+
+// import React, { useState } from 'react'
+// import { auth } from "@/config/firebaseConfig";
+
+// const SummarizePage = () => {
+//   const [open, setOpen] = useState(false);
+
+//   const signWithGoogle = async () => {
+//     const results = await signInWithPopup(auth, provider);
+//   }
+//   return (
+//     <div className="border border-gray-300 rounded-md p-2 m-2 h-[90vh] focus:outline-none focus:ring-2 flex flex-col justify-center items-center focus:ring-blue-500">
+//       <div className='bg-white w-full h-[70vh] shadow-md rounded-2xl flex p-2'>
+//         <textarea className='w-full rounded-1-2xl p-5 resize-none md:border-r focus:outline-none border-2px' placeholder="Paste your text here..." />
+
+//         <textarea disabled className='w-full rounded-1-2xl p-5 resize-none md:border-r focus:outline-none border-2px' placeholder="Your summary will appear here..." />
+//       </div>
+//       <button className='mt-8 bg-black text-white px-4 py-2 rounded cursor-pointer'>Generate Summary</button>
+//     </div>
+//   )
+// }
+
+// export default SummarizePage
+
+
+
+
+
+
+
+
+
+
+
+
+
+// to get the summary of the text
+
+"use client"
+
+import { useState } from "react"
+import { GoogleGenAI } from "@google/genai"
+
+const SummarizePage = () => {
+  const [inputText, setInputText] = useState("")
+  const [summary, setSummary] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const handleSummarize = async () => {
+    if (!inputText.trim()) return
+
+    try {
+      setLoading(true)
+      setSummary("")
+
+      const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GEMINI_TEXT_API_KEY })
+
+      const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: `Please summarize the following text clearly and concisely. Highlight the key points:\n\n${inputText}`,
+              },
+            ],
+          },
+        ],
+      })
+
+      setSummary(response.text ?? "Could not generate summary.")
+    } catch (err) {
+      console.error(err)
+      setSummary("Something went wrong. Please try again.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="flex flex-col items-center gap-4 p-4">
+      {/* Two-panel area */}
+      <div className="w-full flex border rounded-xl overflow-hidden bg-white shadow-sm min-h-[60vh]">
+        {/* Left - Input */}
+        <textarea
+          className="w-1/2 p-4 text-sm text-gray-700 resize-none outline-none border-r"
+          placeholder="Paste your text here..."
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+        />
+
+        {/* Right - Output */}
+        <div className="w-1/2 p-4 text-sm text-gray-500">
+          {loading ? (
+            <p className="animate-pulse">Summarizing...</p>
+          ) : summary ? (
+            <p className="text-gray-700 whitespace-pre-wrap">{summary}</p>
+          ) : (
+            <p>Your summary will appear here...</p>
+          )}
+        </div>
+      </div>
+
+      {/* Button */}
+      <button
+        onClick={handleSummarize}
+        disabled={loading || !inputText.trim()}
+        className="bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 disabled:opacity-50 transition-all"
+      >
+        {loading ? "Generating..." : "Generate Summary"}
+      </button>
+    </div>
+  )
+}
+
+export default SummarizePage
