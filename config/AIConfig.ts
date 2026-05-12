@@ -1,63 +1,11 @@
-// // To run this code you need to install the following dependencies:
-// // npm install @google/genai mime
-// // npm install -D @types/node
-
-// import {
-//   GoogleGenAI,
-// } from '@google/genai';
-
-// async function main() {
-//   const ai = new GoogleGenAI({
-//     apiKey: process.env['NEXT_PUBLIC_GEMINI_API_KEY'],
-//   });
-//   const tools = [
-//     {
-//       googleSearch: {
-//       }
-//     },
-//   ];
-//   const config = {
-//     thinkingConfig: {
-//       thinkingLevel: ThinkingLevel.HIGH,
-//     },
-//     tools,
-//   };
-//   export = const model = 'gemini-3-flash-preview';
-//   const contents = [
-//     {
-//       role: 'user',
-//       parts: [
-//         {
-//           text: `INSERT_INPUT_HERE`,
-//         },
-//       ],
-//     },
-//   ];
-
-//   const response = await ai.models.generateContentStream({
-//     model,
-//     config,
-//     contents,
-//   });
-//   let fileIndex = 0;
-//   for await (const chunk of response) {
-//     if (chunk.text) {
-//       console.log(chunk.text);
-//     }
-//   }
-// }
-
-// main();
-
-
-
-
-
 // To run this code you need to install the following dependencies:
 // npm install @google/genai mime
 // npm install -D @types/node
 
-import { GoogleGenAI, } from '@google/genai';
+import {
+  GoogleGenAI,
+  ThinkingLevel,
+} from '@google/genai';
 
 async function main() {
   const ai = new GoogleGenAI({
@@ -71,11 +19,12 @@ async function main() {
   ];
   const config = {
     thinkingConfig: {
-      thinkingLevel: ThinkingLevel.HIGH,
+      thinkingLevel: ThinkingLevel.MINIMAL,
     },
     tools,
   };
-  export = const model = 'gemini-3-flash-preview';
+  
+  const model = 'gemini-3.1-flash-lite';
   const contents = [
     {
       role: 'user',

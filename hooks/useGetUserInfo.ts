@@ -2,21 +2,23 @@
 
 import { useEffect, useState } from "react"
 
+
 export const useGetUserInfo = () => {
   const [userInfo, setUserInfo] = useState({
     name: "",
     userId: "",
     userEmail: "",
-    isAuth: false,
+    isAuth: false
   });
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if(typeof window !== "undefined") {
       const storedData = localStorage.getItem("auth");
-      if (storedData) {
+      if(storedData){
         setUserInfo(JSON.parse(storedData));
       }
-    };
+    }
+
   }, []);
 
   return userInfo;

@@ -61,23 +61,39 @@
 
 "use client"
 
-import { useState } from "react"
+import { use, useState } from "react"
 import { GoogleGenAI } from "@google/genai"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { signInWithPopup } from "firebase/auth"
 import { auth, provider } from "@/config/firebaseConfig"
+import { useGetUserInfo } from "@/hooks/useGetUserInfo"
+import { toast } from "sonner"
+
 
 const SummarizePage = () => {
   const [inputText, setInputText] = useState("")
   const [summary, setSummary] = useState("")
   const [loading, setLoading] = useState(false)
   const [open,setOpen] = useState(false)
+  const [userText, setUserText] = useState("")
 
   const signInWithGoogle = async () => {
     const results = await signInWithPopup(auth, provider);
 
-    console.log("results: ", results)
+    const {isAuth,userEmail} = useGetUserInfo();
+
+    const authInfo = {
+      user: results.user.uid,
+      userEmail: results.user.email,
+      name: results.user.displayName,
+      isAuth: true
+    };
+
+    if(typeof window !== "undefined") {
+      localStorage.setItem("auth", JSON.stringify(authInfo));
+    }
+
   };
 
 
@@ -113,12 +129,26 @@ const SummarizePage = () => {
     }
   }
 
+  const generateSummary = async () => {
+    if(!auth){
+      setOpen(true);
+      return;
+    }
+
+    if(userText.split("").length < 10){
+      toast("text is too short to summarize")
+    }
+
+
+  }
+
   return (
     <div className="flex flex-col items-center gap-4 p-4">
       {/* Two-panel area */}
       <div className="w-full flex border rounded-xl overflow-hidden bg-white shadow-sm min-h-[60vh]">
         {/* Left - Input */}
         <textarea
+          onChange={(e) => setUserText(e.target.value)}
           className="w-1/2 p-4 text-sm text-gray-700 resize-none outline-none md:border-r"
           placeholder="Paste your text here..."
           // value={inputText}
@@ -147,7 +177,7 @@ const SummarizePage = () => {
         // onClick={handleSummarize}
         // disabled={loading || !inputText.trim()}
         className=" bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 disabled:opacity-50 transition-all"
-        onClick={() => setOpen(!open)}
+        onClick={generateSummary}
       >
         Generate summary
         {/* {loading ? "Generating..." : "Generate Summary"} */}
