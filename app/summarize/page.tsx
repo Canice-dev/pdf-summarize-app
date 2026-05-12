@@ -56,16 +56,30 @@
 
 
 // to get the summary of the text
+// claude AI
+
 
 "use client"
 
 import { useState } from "react"
 import { GoogleGenAI } from "@google/genai"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+import { signInWithPopup } from "firebase/auth"
+import { auth, provider } from "@/config/firebaseConfig"
 
 const SummarizePage = () => {
   const [inputText, setInputText] = useState("")
   const [summary, setSummary] = useState("")
   const [loading, setLoading] = useState(false)
+  const [open,setOpen] = useState(false)
+
+  const signInWithGoogle = async () => {
+    const results = await signInWithPopup(auth, provider);
+
+    console.log("results: ", results)
+  };
+
 
   const handleSummarize = async () => {
     if (!inputText.trim()) return
@@ -105,14 +119,14 @@ const SummarizePage = () => {
       <div className="w-full flex border rounded-xl overflow-hidden bg-white shadow-sm min-h-[60vh]">
         {/* Left - Input */}
         <textarea
-          className="w-1/2 p-4 text-sm text-gray-700 resize-none outline-none border-r"
+          className="w-1/2 p-4 text-sm text-gray-700 resize-none outline-none md:border-r"
           placeholder="Paste your text here..."
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
+          // value={inputText}
+          // onChange={(e) => setInputText(e.target.value)}
         />
 
         {/* Right - Output */}
-        <div className="w-1/2 p-4 text-sm text-gray-500">
+        {/* <div className="w-1/2 p-4 text-sm text-gray-500 hidden md:inline-flex">
           {loading ? (
             <p className="animate-pulse">Summarizing...</p>
           ) : summary ? (
@@ -120,17 +134,36 @@ const SummarizePage = () => {
           ) : (
             <p>Your summary will appear here...</p>
           )}
-        </div>
+        </div> */}
+
+        <textarea
+          className="w-1/2 p-4 text-sm text-gray-700 resize-none outline-none md:border-r"
+          placeholder=""
+          />
       </div>
 
       {/* Button */}
       <button
-        onClick={handleSummarize}
-        disabled={loading || !inputText.trim()}
-        className="bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 disabled:opacity-50 transition-all"
+        // onClick={handleSummarize}
+        // disabled={loading || !inputText.trim()}
+        className=" bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 disabled:opacity-50 transition-all"
+        onClick={() => setOpen(!open)}
       >
-        {loading ? "Generating..." : "Generate Summary"}
+        Generate summary
+        {/* {loading ? "Generating..." : "Generate Summary"} */}
       </button>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Sign in with google</DialogTitle>
+            <DialogDescription>
+              Please Sign in with your Google account to continue.
+            </DialogDescription>
+            <Button className="mt-8" onClick={signInWithGoogle}>Sign In with Google</Button>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
