@@ -66,9 +66,12 @@ import { GoogleGenAI } from "@google/genai"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { signInWithPopup } from "firebase/auth"
-import { auth, provider } from "@/config/firebaseConfig"
+import { auth, db, provider } from "@/config/firebaseConfig"
 import { useGetUserInfo } from "@/hooks/useGetUserInfo"
 import { toast } from "sonner"
+import { generateAIResponse } from "@/config/AIConfig"
+import { doc, setDoc } from "firebase/firestore"
+import { useRouter } from "next/navigation"
 
 
 const SummarizePage = () => {
@@ -78,10 +81,15 @@ const SummarizePage = () => {
   const [open,setOpen] = useState(false)
   const [userText, setUserText] = useState("")
 
+  const {isAuth,userEmail} = useGetUserInfo();
+
+  const router = useRouter();
+
+
   const signInWithGoogle = async () => {
     const results = await signInWithPopup(auth, provider);
 
-    const {isAuth,userEmail} = useGetUserInfo();
+    // const {isAuth,userEmail} = useGetUserInfo();
 
     const authInfo = {
       user: results.user.uid,
@@ -136,11 +144,37 @@ const SummarizePage = () => {
     }
 
     if(userText.split("").length < 10){
-      toast("text is too short to summarize")
+      toast("text is too short to summarize");
+      return;
     }
 
+    setLoading(true);
 
-  }
+    const prompt = `Summarize this text: ${userText}`;
+    const result = await generateAIResponse(prompt);
+
+    setLoading(false);
+
+    console.log("Summarized text:", result);
+
+    saveSummary(result);
+  };
+
+  const saveSummary = async (result: string) => {
+    setLoading(true);
+    const id = Date.now().toString();
+
+    await setDoc(doc(db, "Summaries", id),{
+      userText,
+      summary,
+      userEmail,
+      id
+    })
+
+    setLoading(false);
+
+    router.push(`/summary/${id}`);
+  };
 
   return (
     <div className="flex flex-col items-center gap-4 p-4">
@@ -177,10 +211,10 @@ const SummarizePage = () => {
         // onClick={handleSummarize}
         // disabled={loading || !inputText.trim()}
         className=" bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 disabled:opacity-50 transition-all"
+        disabled={loading}
         onClick={generateSummary}
       >
-        Generate summary
-        {/* {loading ? "Generating..." : "Generate Summary"} */}
+        {loading ? "Generating..." : "Generate Summary"} 
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>

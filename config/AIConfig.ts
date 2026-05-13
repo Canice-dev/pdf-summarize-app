@@ -1,38 +1,79 @@
-// To run this code you need to install the following dependencies:
-// npm install @google/genai mime
-// npm install -D @types/node
+// // To run this code you need to install the following dependencies:
+// // npm install @google/genai mime
+// // npm install -D @types/node
 
-import {
-  GoogleGenAI,
-  ThinkingLevel,
-} from '@google/genai';
+// import {
+//   GoogleGenAI,
+//   ThinkingLevel,
+// } from '@google/genai';
 
-async function main() {
-  const ai = new GoogleGenAI({
-    apiKey: process.env['NEXT_PUBLIC_GEMINI_API_KEY'],
-  });
-  const tools = [
-    {
-      googleSearch: {
-      }
-    },
-  ];
-  const config = {
-    thinkingConfig: {
-      thinkingLevel: ThinkingLevel.MINIMAL,
-    },
-    tools,
-  };
+// async function main() {
+//   const ai = new GoogleGenAI({
+//     apiKey: process.env['NEXT_PUBLIC_GEMINI_API_KEY'],
+//   });
+//   const tools = [
+//     {
+//       googleSearch: {
+//       }
+//     },
+//   ];
+//   const config = {
+//     thinkingConfig: {
+//       thinkingLevel: ThinkingLevel.MINIMAL,
+//     },
+//     tools,
+//   };
   
-  const model = 'gemini-3.1-flash-lite';
+//   const model = 'gemini-3.1-flash-lite';
+//   const contents = [
+//     {
+//       role: 'user',
+//       parts: [
+//         {
+//           text: `INSERT_INPUT_HERE`,
+//         },
+//       ],
+//     },
+//   ];
+
+//   const response = await ai.models.generateContentStream({
+//     model,
+//     config,
+//     contents,
+//   });
+//   let fileIndex = 0;
+//   for await (const chunk of response) {
+//     if (chunk.text) {
+//       console.log(chunk.text);
+//     }
+//   }
+// }
+
+// main();
+
+
+
+
+
+//
+
+import { GoogleGenAI, ThinkingLevel } from '@google/genai';
+
+const ai = new GoogleGenAI({
+  apiKey: process.env['NEXT_PUBLIC_GEMINI_API_KEY'],
+});
+
+const model = 'gemini-2.5-flash';
+
+const config = {
+  tools: [{ googleSearch: {} }],
+};
+
+export async function generateAIResponse(prompt: string): Promise<string> {
   const contents = [
     {
       role: 'user',
-      parts: [
-        {
-          text: `INSERT_INPUT_HERE`,
-        },
-      ],
+      parts: [{ text: prompt }],
     },
   ];
 
@@ -41,14 +82,14 @@ async function main() {
     config,
     contents,
   });
-  let fileIndex = 0;
+
+  let result = '';
   for await (const chunk of response) {
     if (chunk.text) {
-      console.log(chunk.text);
+      result += chunk.text;
     }
   }
+
+  return result;
 }
-
-main();
-
 
