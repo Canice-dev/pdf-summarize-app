@@ -166,7 +166,7 @@ const SummarizePage = () => {
 
     await setDoc(doc(db, "Summaries", id),{
       userText,
-      summary,
+      summary: result,
       userEmail,
       id
     })
