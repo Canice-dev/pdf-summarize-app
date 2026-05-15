@@ -203,6 +203,7 @@ const SummarizePage = () => {
         <textarea
           className="w-1/2 p-4 text-sm text-gray-700 resize-none outline-none md:border-r"
           placeholder=""
+          disabled
           />
       </div>
 
