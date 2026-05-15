@@ -171,8 +171,7 @@ const SummaryPage = () => {
               <TabsTrigger value="userText" className="flex-1">Your Text</TabsTrigger>
               <TabsTrigger value="summary" className="flex-1">Your Summary</TabsTrigger>
             </TabsList>
-            <div>
-              <TabsContent value="userText">
+            <TabsContent value="userText">
               <Card>
                 <CardHeader>
                   <CardTitle>user Text</CardTitle>
@@ -183,8 +182,6 @@ const SummaryPage = () => {
                 </CardContent>
               </Card>
             </TabsContent>
-            </div>
-            
             <TabsContent value="summary">
               <Card>
                 <CardHeader>
