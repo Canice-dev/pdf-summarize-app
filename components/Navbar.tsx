@@ -251,8 +251,8 @@ const Navbar = () => {
           </Link>
 
           <div className="flex flex-col md:flex-row gap-2 mt-3">
-            <Button variant="outline" className="w-full">Upgrade to Pro</Button>
-            <Button className="w-full">Sign in</Button>
+            <Button variant="outline" className="flex-1 pt-2 pb-2">Upgrade to Pro</Button>
+            <Button className="flex-1 pt-2 pb-2">Sign in</Button>
           </div>
         </div>
       </div>

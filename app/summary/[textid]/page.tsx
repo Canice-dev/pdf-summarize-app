@@ -148,7 +148,7 @@ const SummaryPage = () => {
         <>
           <div className="flex justify-between items-center w-full text-lg font-semibold pt-5 pb-2">
             <p>Your Text</p>
-            <p>Your Summary</p>
+            <p className='justify-left'>Your Summary</p>
           </div>
           <div className="bg-white w-full h-[70vh] shadow-md rounded-2xl flex p-2">
             <textarea
@@ -196,7 +196,9 @@ const SummaryPage = () => {
       )}
 
       <button className="bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-all">
-        Generate a New Summary
+        <a href="/summarize">
+          Generate a New Summary
+        </a>
       </button>
     </div>
   );
