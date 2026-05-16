@@ -100,7 +100,7 @@
 
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { db } from '@/config/firebaseConfig'
 import { doc, getDoc } from 'firebase/firestore'
@@ -166,16 +166,15 @@ const SummaryPage = () => {
       ) : (
         // ✅ SMALL & MEDIUM: Tabs
         <div className="w-full pt-5">
-          <Tabs defaultValue="userText" className="w-full">
-            <TabsList className="w-full">
+          <Tabs defaultValue="userText" className="flex-col ">
+            <TabsList className="w-full justify-start gap-4 px-0">
               <TabsTrigger value="userText" className="flex-1">Your Text</TabsTrigger>
               <TabsTrigger value="summary" className="flex-1">Your Summary</TabsTrigger>
             </TabsList>
-            <TabsContent value="userText">
+            <TabsContent value="userText" className=''>
               <Card>
                 <CardHeader>
                   <CardTitle>user Text</CardTitle>
-                  <CardDescription>Here's the text you provided for summarization.</CardDescription>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground">
                   {data.userText}
@@ -186,7 +185,6 @@ const SummaryPage = () => {
               <Card>
                 <CardHeader>
                   <CardTitle>Your Summary</CardTitle>
-                  <CardDescription>Here's the summary generated for your text.</CardDescription>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground">
                   {data.summary}
