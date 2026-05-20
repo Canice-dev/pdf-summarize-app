@@ -17,7 +17,7 @@ const Home = () => {
       
 
       {/* Inside your page/component */}
-      <PDFUpload />
+      {/* <PDFUpload /> */}
 
       <div className='mt-12'>
         <h1 className='text-1xl md:text-[30px] lg:text-{36px] font-bold mb-4'>PDF Tools</h1>
@@ -57,6 +57,9 @@ const Home = () => {
             <p className='text-sm text-muted-foreground leading-relaxed'>
               Convert PDFs to Word, Excel, PowerPoint, HTML, and more with a single click.
             </p>
+            <Link href='/summarizePdf'>
+              <Button className='mt-8 p-2 '>Use</Button>
+            </Link>
           </div>
 
           <div className='rounded-2xl border border-border bg-white p-5 rounded-2xl border border-border bg-white p-5 hover:-translate-y-1 hover:shadow-md transition-all duration-200 cursor-pointer'>
