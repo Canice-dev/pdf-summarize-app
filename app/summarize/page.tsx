@@ -89,8 +89,6 @@ const SummarizePage = () => {
   const signInWithGoogle = async () => {
     const results = await signInWithPopup(auth, provider);
 
-    // const {isAuth,userEmail} = useGetUserInfo();
-
     const authInfo = {
       user: results.user.uid,
       userEmail: results.user.email,

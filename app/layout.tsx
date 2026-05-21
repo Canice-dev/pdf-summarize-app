@@ -44,6 +44,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/sonner";
+import PDFUpload from "@/components/pdfUpload";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -65,6 +66,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Toaster />
         <Navbar />
+        {/* <PDFUpload /> */}
         {children}
       </body>
     </html>
