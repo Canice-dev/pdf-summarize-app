@@ -94,9 +94,9 @@ const PDFUpload = () => {
     setFile(selected)
     //if breaks
     // const text = 
-    await extractTextFromPDF(selected)
+    const fullText = await extractTextFromPDF(selected)
     //if it breaks
-    // setInputText(text)
+    setUserText(fullText)
 
   }
 
@@ -194,15 +194,15 @@ const PDFUpload = () => {
 
 
   //     // 6. Save to Firestore
-  //     const docRef = await addDoc(collection(db, "summaries"), {
-  //       summary: text,
-  //       fileName: file.name,
-  //       userEmail: userEmail,
-  //       createdAt: new Date(),
-  //     })
+      // const docRef = await addDoc(collection(db, "summaries"), {
+      //   summary,
+      //   fileName: file.name,
+      //   userEmail: userEmail,
+      //   createdAt: new Date(),
+      // })
 
   //     // 7. Navigate to the dynamic summary page with the real Firestore ID
-  //     router.push(`/summaryPdf/${docRef.id}`)
+      // router.push(`/summaryPdf/${docRef.id}`)
 
     } catch (err) {
       toast("Something went wrong. Please try again.")
@@ -228,7 +228,7 @@ const PDFUpload = () => {
     const id = Date.now().toString();
 
     await setDoc(doc(db, "Summaries", id),{
-      userText,
+      userText: fullText,
       summary: result,
       userEmail,
       id
