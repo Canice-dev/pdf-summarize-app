@@ -9,29 +9,95 @@ import { auth, provider, db } from "@/config/firebaseConfig"
 import { collection, addDoc } from "firebase/firestore"
 import { useGetUserInfo } from "@/hooks/useGetUserInfo"
 import { toast } from "sonner"
-// import { GoogleGenAI } from "@google/genai"
-import { pdfjs } from 'react-pdf';
+import { GoogleGenAI } from "@google/genai"
+import { generateAIResponse } from "@/config/AIConfig"
+import { doc, setDoc } from "firebase/firestore"
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).toString();
-// import * as pdfjsLib from "pdfjs-dist"
-// pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`
+
+// import { pdfjs } from "react-pdf" // ← ADD THIS
+
+
+
+// // ← ADD THIS
+// if (typeof window !== "undefined"){
+//   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+//     "react-pdf/node_modules/pdfjs-dist/build/pdf.worker.min.mjs",
+//     import.meta.url
+//   ).toString()
+// }
+
+
+// ← ADD THIS (outside the component)
+// const extractTextFromPDF = async (file: File) => {
+//   const arrayBuffer = await file.arrayBuffer()
+//   const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise
+//   let fullText = ""
+//   for (let i = 1; i <= pdf.numPages; i++) {
+//     const page = await pdf.getPage(i)
+//     const content = await page.getTextContent()
+//     const pageText = content.items.map((item: any) => item.str).join(" ")
+//     fullText += `${pageText}\n`
+//   }
+//   console.log(fullText) // 👈 check browser console
+//   return fullText
+// }
+
+const extractTextFromPDF = async (file: File): Promise<string> => {
+  // ✅ only imports in the browser, never on the server
+  const { pdfjs } = await import("react-pdf")
+
+  pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+    "react-pdf/node_modules/pdfjs-dist/build/pdf.worker.min.mjs",
+    import.meta.url
+  ).toString()
+
+  const arrayBuffer = await file.arrayBuffer()
+  const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise
+  let fullText = ""
+
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i)
+    const content = await page.getTextContent()
+    const pageText = content.items.map((item: any) => item.str).join(" ")
+    fullText += `${pageText}\n`
+  }
+
+  console.log(fullText)
+  return fullText
+}
+
+
+
 
 const PDFUpload = () => {
   const [open, setOpen] = useState(false)
+  const [inputText, setInputText] = useState("")
+  const [summary, setSummary] = useState("")
   const [file, setFile] = useState<File | null>(null)
   const [dragging, setDragging] = useState(false)
   const [loading, setLoading] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const router = useRouter()
+  const [userText, setUserText] = useState("")
+
+  // const router = useRouter()
 
   const { isAuth, userEmail } = useGetUserInfo()
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // const router = useRouter();
+
+
+
+   // ← UPDATE THIS to async and call extractTextFromPDF
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0]
-    if (selected) setFile(selected)
+    if (!selected) return
+    setFile(selected)
+    //if breaks
+    // const text = 
+    await extractTextFromPDF(selected)
+    //if it breaks
+    // setInputText(text)
+
   }
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
@@ -40,6 +106,18 @@ const PDFUpload = () => {
     const dropped = e.dataTransfer.files?.[0]
     if (dropped && dropped.type === "application/pdf") setFile(dropped)
   }
+
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const selected = e.target.files?.[0]
+  //   if (selected) setFile(selected)
+  // }
+
+  // const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+  //   e.preventDefault()
+  //   setDragging(false)
+  //   const dropped = e.dataTransfer.files?.[0]
+  //   if (dropped && dropped.type === "application/pdf") setFile(dropped)
+  // }
 
   const signInWithGoogle = async () => {
     const results = await signInWithPopup(auth, provider);
@@ -76,54 +154,43 @@ const PDFUpload = () => {
 
     try {
       setLoading(true)
+      setSummary("")
 
-      // 4. Convert PDF to base64
-      const base64 = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader()
-        reader.onload = () => {
-          const result = reader.result as string
-          resolve(result.split(",")[1])
-        }
-        reader.onerror = reject
-        reader.readAsDataURL(file)
+      const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GEMINI_TEXT_API_KEY })
+
+      const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: `Please summarize the following text clearly and concisely. Highlight the key points:\n\n${inputText}`,
+              },
+            ],
+          },
+        ],
       })
 
-      const extractTextFromPDF = async (file: File): Promise<string> => {
-        const arrayBuffer = await file.arrayBuffer()
-        const pdf = await pdfjsLib.getDocument({ 
-          data: arrayBuffer, 
-          useSystemFonts: true 
-        }).promise
-        // const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
-        let fullText = ""
+      setSummary(response.text ?? "Could not generate summary.")
 
-        for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i)
-          const content = await page.getTextContent()
-          const pageText = content.items.map((item: any) => item.str).join(" ")
-          fullText += `${pageText}\n`
-        }
 
-        return fullText
-      }
+      // 4. Convert PDF to base64
+      // const base64 = await new Promise<string>((resolve, reject) => {
+      //   const reader = new FileReader()
+      //   reader.onload = () => {
+      //     const result = reader.result as string
+      //     resolve(result.split(",")[1])
+      //   }
+      //   reader.onerror = reject
+      //   reader.readAsDataURL(file)
+      // })
+
+
 
 
       //
-      const binaryStr = atob(base64)
-      const bytes = new Uint8Array(binaryStr.length)
-      for (let i = 0; i < binaryStr.length; i++) {
-        bytes[i] = binaryStr.charCodeAt(i)
-      }
 
-      const pdf = await pdfjsLib.getDocument({ data: bytes }).promise
-      let fullText = ""
-
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i)
-        const content = await page.getTextContent()
-        const pageText = content.items.map((item: any) => item.str).join(" ")
-        fullText += `\n--- Page ${i} ---\n${pageText}`
-      }
 
 
   //     // 6. Save to Firestore
@@ -143,7 +210,38 @@ const PDFUpload = () => {
     } finally {
       setLoading(false)
     }
-  }
+
+    setLoading(true);
+
+    const prompt = `Summarize this text: ${userText}`;
+    const result = await generateAIResponse(prompt);
+
+    setLoading(false);
+
+    console.log("Summarized text:", result);
+
+    saveSummary(result);
+  };
+
+  const saveSummary = async (result: string) => {
+    setLoading(true);
+    const id = Date.now().toString();
+
+    await setDoc(doc(db, "Summaries", id),{
+      userText,
+      summary: result,
+      userEmail,
+      id
+    })
+
+    setLoading(false);
+
+    // router.push(`/app/summaryPdf/${id}`);
+  };
+
+
+
+  
 
   return (
     <div className="w-full max-w-xl mx-auto flex flex-col gap-3 p-3">
@@ -244,7 +342,9 @@ const PDFUpload = () => {
         </span>
       ))}
     </div>
-    <Button onClick={SummaryPDF}>Summarize pdf</Button>
+    <Button onClick={SummaryPDF}
+          disabled={loading}
+    >Summarize pdf</Button>
 
       {/* Auth Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
@@ -263,7 +363,8 @@ const PDFUpload = () => {
 
     </div>
   )
-}
+
+};
 
 export default PDFUpload
 
