@@ -83,7 +83,7 @@ const PDFUpload = () => {
 
   const { isAuth, userEmail } = useGetUserInfo()
 
-  // const router = useRouter();
+  const router = useRouter();
 
 
 
@@ -213,7 +213,7 @@ const PDFUpload = () => {
 
     setLoading(true);
 
-    const prompt = `Summarize this text: ${fullText}`;
+    const prompt = `Summarize this text: ${userText}`;
     const result = await generateAIResponse(prompt);
 
     setLoading(false);
@@ -228,7 +228,7 @@ const PDFUpload = () => {
     const id = Date.now().toString();
 
     await setDoc(doc(db, "Summaries", id),{
-      userText: fullText,
+      userText,
       summary: result,
       userEmail,
       id
@@ -236,7 +236,7 @@ const PDFUpload = () => {
 
     setLoading(false);
 
-    // router.push(`/app/summaryPdf/${id}`);
+    router.push(`/summaryPdf/${id}`);
   };
 
 
