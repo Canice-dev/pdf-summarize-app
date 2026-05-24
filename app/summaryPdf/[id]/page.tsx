@@ -40,22 +40,24 @@ const SummaryPdf = () => {
   }, [id]);
 
   return(
-    <div className=" py-5 px-4 md:px-8 flex flex-col ">
-      <div className="p-4text-lg font-semibold">
+    <div className=" py-5 px-4 md:px-8flex-col ">
+      <div className="p-4 text-lg font-semibold">
         <p>Summarized Text</p>
       </div>
-      <div>
+      <div className="flex w-full p-3 text-sm text-gray-700 h-[70vh] resize-none outline-none">
         <textarea 
-          className="w-full text-sm text-gray-700 h-[70vh] resize-none outline-none"
+          className="w-full text-sm text-gray-700 h-full resize-none outline-none"
           disabled
           value={data.summary}
         />
       </div>
-        <button className="bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-all items-center justify-center mt-4">
+      <div>
+        <button className="bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-all items-center justify-center">
           <a href="/summarizePdf">
             Generate a New Summary
           </a>
         </button>
+      </div>
     </div>
   )
 };

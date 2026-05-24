@@ -60,13 +60,13 @@ CBT prep,
 low-data mode,
 WhatsApp sharing,
 local course structures.
-MVP Features
+## MVP Features
 Upload PDF
 AI summary
 Generate likely exam questions
 Explain difficult topics
 Chat with lecture notes
-Tech Stack
+## Tech Stack
 Next.js
 Node.js/Express
 OpenAI API or Claude API
@@ -120,7 +120,7 @@ That alone can help you get internships/jobs.
 
 Startup Names You Could Use
 
-For an AI academic platform:
+## For an AI academic platform:
 
 StudyFlow
 Nota AI
