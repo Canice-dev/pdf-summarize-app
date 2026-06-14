@@ -74,6 +74,7 @@ import { doc, setDoc } from "firebase/firestore"
 import { useRouter } from "next/navigation"
 
 
+
 const SummarizePage = () => {
   const [inputText, setInputText] = useState("")
   const [summary, setSummary] = useState("")

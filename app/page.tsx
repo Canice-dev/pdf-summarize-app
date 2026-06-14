@@ -67,6 +67,9 @@ const Home = () => {
             <p className='text-sm text-muted-foreground leading-relaxed'>
               Combine multiple PDFs into one, or extract specific pages into a new file.
             </p>
+            <Link href='/chat'>
+              <Button className='mt-8 p-2 '>Use</Button>
+            </Link>
           </div>
         </div>
       </div>
