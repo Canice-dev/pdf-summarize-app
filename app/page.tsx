@@ -9,13 +9,31 @@ import page from './summarize/page'
 const Home = () => {
   return (
     <div className='px-4 md:px-12 flex flex-col justify-center items-center min-h-[85vh] relative mx-auto text-center'>
-      <h1 className='text-3xl md:text-[70px] lg:text-{78px] font-bold max-w-4xl'>Turn PDFs into Intelligent Conversations
-      </h1>
-      <p className='text-sm mt:2 md:text-base text-center text-gray-700 mb-8 max-w-4xl'>AI-powered PDF summarizer that extracts key insights instantly. Supports OCR, format conversion, merge, encrypt and more.</p>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4 p-5'>
+        <div className='text-left'>
+          <h1 className='text-2xl md:text-[70px] lg:text-{78px] max-w-4xl'>Turn PDFs into Intelligent Conversations
+          </h1>
+          <p className='text-sm mt-2 md:text-base text-gray-700 mb-8 max-w-4xl'>Sumpdf enables you to summarize documents, extract valuable insights, and chat with your PDFs using AI. Upload your files, ask questions, and receive intelligent answers powered by your documents and enhanced with real-time web search.</p>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-1 mt-8 place-items-center mb-10'>
+            <section className="flex flex-col gap-1 border-r px-3">
+              <h4 className="text-md font-semibold text-center">5+ PDF Tools</h4>
+              <p className='items-start'>Everything in one place.</p>
+            </section>
+            <section className="flex flex-col gap-1 border-r px-3">
+              <h4 className="text-md font-semibold text-center">Smart AI Analysis</h4>
+              <p className='items-start'>Summarize and extract insights</p>
+            </section>
+            <section className="flex flex-col items-start gap-1 border-r px-3">
+              <h4 className="text-md font-semibold text-center">Trusted Security</h4>
+              <p className='items-start'>Encrypted document handling</p>
+            </section>
+          </div>
+        </div>
+        <div>
+          <p>hello</p>
+        </div>
+      </div>
       
-      
-      
-
       {/* Inside your page/component */}
       {/* <PDFUpload /> */}
 
@@ -25,20 +43,7 @@ const Home = () => {
           <h3 className='text-2xl md:text-[35px] lg:text-{40px] font-bold mb-4'>Everything you need for your PDFs</h3>
           <p>Summarize, convert, merge, compress, and sign powered by AI and built to handle any PDF workflow, fast.</p>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-1 mt-8 place-items-center mb-10'>
-          <section className="flex flex-col items-start gap-1">
-            <h4 className="text-2xl font-semibold">5+</h4>
-            <p >PDF tools available</p>
-          </section>
-          <section className="flex flex-col items-start gap-1">
-            <h4 className="text-2xl font-semibold">AI-Powered</h4>
-            <p>Summaries & extraction</p>
-          </section>
-          <section className="flex flex-col items-start gap-1">
-            <h4 className="text-2xl font-semibold">Secure</h4>
-            <p>Encrypted processing</p>
-          </section>
-        </div>
+
 
 
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-5'>
