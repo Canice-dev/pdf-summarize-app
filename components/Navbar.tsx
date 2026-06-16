@@ -102,7 +102,7 @@ const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(authInf
         </div>
 
         {/* Medium only: PDFtools + Features inline */}
-        <div className="hidden md:flex lg:hidden items-center gap-6 text-sm text-gray-700">
+        <div className="hidden md:flex lg:hidden items-center gap-6 text-sm text-gray-700 ">
           <Link href="/pdf-tools" className="hover:text-black">PDFtools</Link>
           <Link href="/features" className="hover:text-black">Features</Link>
         </div>
