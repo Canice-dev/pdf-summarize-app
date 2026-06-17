@@ -5,6 +5,7 @@ import PDFUpload from '@/components/pdfUpload'
 import page from './summarize/page'
 import { ArrowRight, BookOpen, FileArchive, FileText, FileTextIcon, GitMerge, MessageCircle, PenLine } from 'lucide-react'
 import FaqSection from '@/components/faqSection'
+import CtaBanner from '@/components/ctaBanner'
 
 
 const tools = [
@@ -23,23 +24,23 @@ const Home = () => {
         <div className='text-left'>
           <h1 className='text-2xl md:text-[70px] lg:text-{78px] max-w-4xl'>Turn PDFs into Intelligent Conversations
           </h1>
-          <p className='text-sm mt-2 md:text-base text-gray-700 mb-8 max-w-4xl'>Sumpdf enables you to summarize documents, extract valuable insights, and chat with your PDFs using AI. Upload your files, ask questions, and receive intelligent answers powered by your documents and enhanced with real-time web search.</p>
+          <p className='text-md mt-2 md:text-base mb-8 max-w-4xl'>Sumpdf enables you to summarize documents, extract valuable insights, and chat with your PDFs using AI. Upload your files, ask questions, and receive intelligent answers powered by your documents and enhanced with real-time web search.</p>
           <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8 mb-10'>
             <section className="flex flex-col gap-1 border-r px-3">
               <h4 className="text-sm font-semibold">5+ PDF Tools</h4>
-              <p className="text-xs text-gray-700">Everything in one place.</p>
+              <p className="text-xs">Everything in one place.</p>
             </section>
             <section className="flex flex-col gap-1 border-r px-3">
               <h4 className="text-sm font-semibold">Smart AI Analysis</h4>
-              <p className="text-xs text-gray-700">Summarize and extract insights</p>
+              <p className="text-xs">Summarize and extract insights</p>
             </section>
             <section className="flex flex-col gap-1 border-r px-3">
               <h4 className="text-sm font-semibold">Trusted Security</h4>
-              <p className="text-xs text-gray-700">Encrypted document handling</p>
+              <p className="text-xs">Encrypted document handling</p>
             </section>
             <section className="flex flex-col gap-1 px-3">
               <h4 className="text-sm font-semibold">Real-time Web Search</h4>
-              <p className="text-xs text-gray-700">Answers backed by live data</p>
+              <p className="text-xs">Answers backed by live data</p>
             </section>
           </div>
         </div>
@@ -70,7 +71,7 @@ const Home = () => {
       {/* <PDFUpload /> */}
 
       <div className='mt-12'>
-        <h1 className='text-[15px] font-medium tracking-[.1em] uppercase text-gray-700 mb-3'>PDF Tools</h1>
+        <h1 className='text-[15px] font-medium tracking-[.1em] uppercase mb-3'>PDF Tools</h1>
         <div className='mb-4'>
           <h3 className='font-bold mb-3 text-[clamp(1.8rem,3.5vw,2.6rem)]'>Everything you need for your PDFs</h3>
           <p>Summarize, convert, merge, compress, and sign powered by AI and built to handle any PDF workflow, fast.</p>
@@ -87,7 +88,8 @@ const Home = () => {
               </div>
               SUMMARIZE TEXT
             </h3>
-            <p className='text-sm text-muted-foreground leading-relaxed'>
+            {/* text-muted-foreground for lighter texts */}
+            <p className='text-sm leading-relaxed'>
               Extract the key points from any text in seconds.<br/>Get the gist of any text in seconds.
             </p>
             <Link href="/summarize">
@@ -105,7 +107,7 @@ const Home = () => {
               </div>
               SUMMARIZE PDF
             </h3>
-            <p className='text-sm text-muted-foreground leading-relaxed'>
+            <p className='text-sm leading-relaxed'>
               Extract the key points from any PDF in seconds. Research papers, contracts, reports, get the gist without reading every page.
             </p>
             <Link href='/summarizePdf'>
@@ -123,7 +125,7 @@ const Home = () => {
               </div>
               ASK YOUR PDF ANYTHING
             </h3>
-            <p className='text-sm text-muted-foreground leading-relaxed'>
+            <p className='text-sm leading-relaxed'>
               Ask a question about your PDF and get a direct answers pulled straight from your PDF document.<br/> Chat with your PDF like it's a person who's read every page.
             </p>
             <Link href='/chat'>
@@ -137,7 +139,9 @@ const Home = () => {
       </div>
       <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />
       <FaqSection />
-      
+      <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />
+      <CtaBanner />
+      <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />      
     </div>
   )
 }
