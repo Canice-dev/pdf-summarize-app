@@ -6,6 +6,8 @@ import page from './summarize/page'
 import { ArrowRight, BookOpen, FileArchive, FileText, FileTextIcon, GitMerge, MessageCircle, PenLine } from 'lucide-react'
 import FaqSection from '@/components/faqSection'
 import CtaBanner from '@/components/ctaBanner'
+import HowitWorks from '@/components/howItWorks'
+import Footer from '@/components/footer'
 
 
 const tools = [
@@ -140,8 +142,11 @@ const Home = () => {
       <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />
       <FaqSection />
       <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />
-      <CtaBanner />
+      <HowitWorks />
       <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />      
+      <CtaBanner />
+      <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />  
+      <Footer />    
     </div>
   )
 }
