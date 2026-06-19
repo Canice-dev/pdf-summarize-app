@@ -6,7 +6,7 @@ import { number } from 'zod';
 
 const HowitWorks = () => {
   return (
-    <div className='mt-12'>
+    <div className='mt-12 scroll-mt-24' id='how-it-works'>
       <h1 className='text-[15px] font-medium tracking-[.1em] uppercase mb-3'>How it Works</h1>
         <div className='mb-8'>
           <h3 className='font-bold mb-3 text-[clamp(1.8rem,3.5vw,2.6rem)]'>From upload to insight in three steps</h3>

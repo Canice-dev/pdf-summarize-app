@@ -1,29 +1,37 @@
+import { Mail } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 const footer = () => {
   return (
-    <div className='grid grid-cols-2 md:grid-cols-4 gap-4 p-5'>
+    <div className='grid grid-cols-1 md:grid-cols-3 text-left gap-4 p-5 bg-zinc-950 text-white'>
       <div className='text-left'>
         <h3 className='text-[15px] font-semibold mb-3'>SumPDF</h3>
-        <p>AI-powered academic platform for everyone. Summarize text, Summarize PDF, and chat with PDFs all in one place.</p>
+        <p>AI-powered academic platform for everyone. Summarize text, Summarize PDF, and chat with <br /> PDFs all in one place.</p>
         <div className="gap-1.5 text-[12px] px-3 py-1.5 rounded-full border border w-fit mt-4 cursor-default">
           All systems operational
         </div>
       </div>
       <div>
-        <h3 className='text-[15px] font-semibold mb-3'>Products</h3>
-        <p>Summarize text</p>
-        <p>Summarize PDF</p>
-        <p>Chat with PDF</p>
+        <h3 className='text-[15px] font-semibold mb-3 md:text-left'>Products</h3>
+        <Link href="/summarize" className='hover:underline'>
+          <p>Summarize text</p>
+        </Link>
+        <Link href="/summarizePdf" className='hover:underline'>
+          <p>Summarize PDF</p>
+        </Link>
+        <Link href="/chat" className='hover:underline'>
+          <p>Chat with PDF</p>
+        </Link>
       </div>
       <div>
-        <h3 className='text-[15px] font-semibold mb-3'>Company</h3>
-        <p>About</p>
-        <p>Pricing</p>
-        <p>Blog</p>
-        <p>Changelog</p>
+        <h3 className='text-[15px] font-semibold mb-3'>Get in touch</h3>
+        <p>Have a question or feature request? We're a small team, and we read every message.</p>
+        <div className='pt-3'>
+          <a href='https://x.com/callme_Canice' target="_blank" rel="noopener noreferrer">Email</a>
+          {/* <Mail size={20} /> */}
+        </div>
       </div>
-      <div>hello</div>
     </div>
   )
 }

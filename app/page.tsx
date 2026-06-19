@@ -8,6 +8,7 @@ import FaqSection from '@/components/faqSection'
 import CtaBanner from '@/components/ctaBanner'
 import HowitWorks from '@/components/howItWorks'
 import Footer from '@/components/footer'
+import SubFooter from '@/components/subFooter'
 
 
 const tools = [
@@ -72,15 +73,12 @@ const Home = () => {
       {/* Inside your page/component */}
       {/* <PDFUpload /> */}
 
-      <div className='mt-12'>
+      <div className='mt-12 scroll-mt-24' id='pdf-tools'>
         <h1 className='text-[15px] font-medium tracking-[.1em] uppercase mb-3'>PDF Tools</h1>
         <div className='mb-4'>
           <h3 className='font-bold mb-3 text-[clamp(1.8rem,3.5vw,2.6rem)]'>Everything you need for your PDFs</h3>
           <p>Summarize, convert, merge, compress, and sign powered by AI and built to handle any PDF workflow, fast.</p>
         </div>
-
-
-
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-5'>
           <div className='rounded-2xl border border-border bg-white p-5 rounded-2xl border border-border bg-white p-5 hover:-translate-y-1 hover:shadow-md transition-all duration-200 cursor-pointer'>
            
@@ -101,7 +99,6 @@ const Home = () => {
               </Button>
             </Link>
           </div>
-
           <div className='rounded-2xl border border-border bg-white p-5 rounded-2xl border border-border bg-white p-5 hover:-translate-y-1 hover:shadow-md transition-all duration-200 cursor-pointer'>
             <h3 className='text-[15px] font-semibold text-zinc-900 leading-snug mb-4 flex items-center justify-center gap-2'>
               <div className="w-9 h-9 rounded-[9px] bg-zinc-50 flex items-center justify-center text-zinc-500 flex-shrink-0">
@@ -119,7 +116,6 @@ const Home = () => {
               </Button>
             </Link>
           </div>
-
           <div className='rounded-2xl border border-border bg-white p-5 rounded-2xl border border-border bg-white p-5 hover:-translate-y-1 hover:shadow-md transition-all duration-200 cursor-pointer'>
             <h3 className='text-[15px] font-semibold text-zinc-900 leading-snug mb-4 flex items-center justify-center gap-2'>
               <div className="w-9 h-9 rounded-[9px] bg-zinc-50 flex items-center justify-center text-zinc-500 flex-shrink-0">
@@ -145,8 +141,9 @@ const Home = () => {
       <HowitWorks />
       <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />      
       <CtaBanner />
-      <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />  
-      <Footer />    
+      {/* <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />   */}
+      <Footer />  
+      <SubFooter />  
     </div>
   )
 }

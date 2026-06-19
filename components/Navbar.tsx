@@ -103,16 +103,15 @@ const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(authInf
 
         {/* Medium only: PDFtools + Features inline */}
         <div className="hidden md:flex lg:hidden items-center gap-6 text-sm text-gray-700 ">
-          <Link href="/pdf-tools" className="hover:text-black">PDFtools</Link>
-          <Link href="/features" className="hover:text-black">Features</Link>
+          <Link href="#pdf-tools" className="hover:text-black">PDFtools</Link>
+          <Link href="#faq" className="hover:text-black">FAQ</Link>
         </div>
 
         {/* Large only: all links */}
         <div className="hidden lg:flex items-center gap-6">
-          <Link href="/pdf-tools">PDFtools</Link>
-          <Link href="/features">Features</Link>
-          <Link href="/how-it-works">How it Works</Link>
-          <Link href="/faq">FAQ</Link>
+          <Link href="#pdf-tools">PDFtools</Link>
+          <Link href="#faq">FAQ</Link>
+          <Link href="#how-it-works">How it Works</Link>
         </div>
 
         {/* Large only: buttons */}
@@ -200,23 +199,19 @@ const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(authInf
         <div className="flex flex-col px-4 md:px-8 pb-5 pt-3 gap-1">
 
           {/* Small only: show all 4 links */}
-          <Link href="/pdf-tools" onClick={() => setOpen(false)}
+          <Link href="#pdf-tools" onClick={() => setOpen(false)}
             className="md:hidden py-2.5 text-sm text-gray-700 hover:text-black border-b border-gray-100">
             PDFtools
           </Link>
-          <Link href="/features" onClick={() => setOpen(false)}
+          <Link href="#faq" onClick={() => setOpen(false)}
             className="md:hidden py-2.5 text-sm text-gray-700 hover:text-black border-b border-gray-100">
-            Features
+            FAQ
           </Link>
 
           {/* Small + Medium: last 2 links */}
-          <Link href="/how-it-works" onClick={() => setOpen(false)}
+          <Link href="#how-it-works" onClick={() => setOpen(false)}
             className="py-2.5 text-sm text-gray-700 hover:text-black border-b border-gray-100">
             How it Works
-          </Link>
-          <Link href="/faq" onClick={() => setOpen(false)}
-            className="py-2.5 text-sm text-gray-700 hover:text-black border-b border-gray-100">
-            FAQ
           </Link>
 
           <div className="flex flex-col md:flex-row gap-2 mt-3">

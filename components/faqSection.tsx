@@ -37,7 +37,7 @@ const FaqSection = () => {
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
 
   return (
-    <section className="font-[family-name:var(--font-outfit)] bg-white py-16 px-6 md:px-12">
+    <section className="mt-12 px-6 md:px-12 scroll-mt-24" id="faq">
       <h1 className='text-[15px] font-medium tracking-[.1em] uppercase mb-3'>FAQ</h1>
       <div className='mb-10'>
         <h3 className='font-bold mb-3 text-[clamp(1.8rem,3.5vw,2.6rem)]'>Frequently asked questions</h3>
