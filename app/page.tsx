@@ -142,8 +142,6 @@ const Home = () => {
       <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />      
       <CtaBanner />
       {/* <div className="w-full h-px bg-zinc-100 my-10 max-w-5xl" />   */}
-      <Footer />  
-      <SubFooter />  
     </div>
   )
 }

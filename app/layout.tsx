@@ -44,7 +44,8 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/sonner";
-import PDFUpload from "@/components/pdfUpload";
+import Footer from '@/components/footer'
+import SubFooter from "@/components/subFooter";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -68,6 +69,8 @@ export default function RootLayout({
         <Navbar />
         {/* <PDFUpload /> */}
         {children}
+        <Footer />
+        <SubFooter /> 
       </body>
     </html>
   );

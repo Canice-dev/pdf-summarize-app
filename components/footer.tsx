@@ -1,10 +1,11 @@
 import { Mail } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import XTwitterIcon from './twitterIcon'
 
 const footer = () => {
   return (
-    <div className='grid grid-cols-1 md:grid-cols-3 text-left gap-4 p-5 bg-zinc-950 text-white'>
+    <div className='grid grid-cols-1 md:grid-cols-3 text-left gap-4 p-5 bg-zinc-950 text-white px-8'>
       <div className='text-left'>
         <h3 className='text-[15px] font-semibold mb-3'>SumPDF</h3>
         <p>AI-powered academic platform for everyone. Summarize text, Summarize PDF, and chat with <br /> PDFs all in one place.</p>
@@ -27,9 +28,8 @@ const footer = () => {
       <div>
         <h3 className='text-[15px] font-semibold mb-3'>Get in touch</h3>
         <p>Have a question or feature request? We're a small team, and we read every message.</p>
-        <div className='pt-3'>
-          <a href='https://x.com/callme_Canice' target="_blank" rel="noopener noreferrer">Email</a>
-          {/* <Mail size={20} /> */}
+        <div className='border w-20'>
+          <XTwitterIcon />
         </div>
       </div>
     </div>

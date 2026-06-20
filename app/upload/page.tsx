@@ -4,9 +4,11 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CheckCircle2, FileText, XCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, FileText, XCircle } from "lucide-react";
 import { useState } from "react";
 import { useGetUserInfo } from "../../hooks/useGetUserInfo";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 type ProgressEvent = {
   stage: "parsing" | "chunking" | "embedding" | "storing" | "done" | "error";
@@ -100,7 +102,7 @@ export default function PDFUpload() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-6">
       <div className="w-full max-w-md space-y-4">
         <div className="space-y-1">
           <h1 className="text-2xl font-semibold tracking-tight">Upload PDF</h1>
@@ -180,6 +182,14 @@ export default function PDFUpload() {
             )}
           </CardContent>
         </Card>
+      </div>
+      <div>
+        <Link href='/chat'>
+          <Button className='mt-8 px-6 py-4 '>
+            Chat with PDF
+            <ArrowRight size={13} />
+          </Button>
+        </Link>
       </div>
     </div>
   );
