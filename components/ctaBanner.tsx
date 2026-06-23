@@ -2,6 +2,7 @@
 
 import { Upload, ArrowRight } from "lucide-react";
 import { Button } from '@/components/ui/button'
+import Link from "next/link";
 
 const stats = [
   { number: "5+", label: "PDF Tools" },
@@ -36,14 +37,18 @@ const CtaBanner = () => {
 
       </div>
       <div className="relative z-10 flex flex-col items-start md:items-end gap-4 justify-end">
+        <Link href="#how-it-works">
           <Button className='mt-8 px-6 py-4' variant="outline">
             See how it works
             <ArrowRight size={12} />
           </Button>
+        </Link>
+        <Link href="#pdf-tools">
           <Button className='mt-8 px-6 py-4'>
             Upload a PDF
             <Upload size={14} />
           </Button>
+        </Link>
           <p className='text-md mt-2 md:text-base mb-8 max-w-4xl'>
             Free — no payment required
           </p>

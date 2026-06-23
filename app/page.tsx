@@ -9,6 +9,7 @@ import CtaBanner from '@/components/ctaBanner'
 import HowitWorks from '@/components/howItWorks'
 import Footer from '@/components/footer'
 import SubFooter from '@/components/subFooter'
+import HeroPreview from '@/components/heroPreview'
 
 
 const tools = [
@@ -48,7 +49,7 @@ const Home = () => {
           </div>
         </div>
         <div>
-          <p>hello</p>
+          <HeroPreview />
         </div>
       </div>
       {/* Tools pill row */}

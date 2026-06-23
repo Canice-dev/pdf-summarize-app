@@ -28,7 +28,7 @@ const footer = () => {
       <div>
         <h3 className='text-[15px] font-semibold mb-3'>Get in touch</h3>
         <p>Have a question or feature request? We're a small team, and we read every message.</p>
-        <div className='border w-20'>
+        <div className='mt-3'>
           <XTwitterIcon />
         </div>
       </div>

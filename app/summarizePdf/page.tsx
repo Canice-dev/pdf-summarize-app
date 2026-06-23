@@ -12,6 +12,7 @@ import { toast } from "sonner"
 import { GoogleGenAI } from "@google/genai"
 import { generateAIResponse } from "@/config/AIConfig"
 import { doc, setDoc } from "firebase/firestore"
+import { ArrowRight } from "lucide-react"
 
 
 // import { pdfjs } from "react-pdf" // ← ADD THIS
@@ -342,9 +343,13 @@ const PDFUpload = () => {
         </span>
       ))}
     </div>
-    <Button onClick={SummaryPDF}
-          disabled={loading}
-    >Summarize pdf</Button>
+    <Button 
+      onClick={SummaryPDF}
+      disabled={loading}
+    >
+      Summarize pdf
+      <ArrowRight size={13} />
+    </Button>
 
       {/* Auth Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>

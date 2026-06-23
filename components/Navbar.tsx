@@ -12,6 +12,7 @@ import { auth, db, provider } from "@/config/firebaseConfig"
 import { use, useState } from "react"
 import { LogOut, SettingsIcon } from 'lucide-react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
+// import GoogleplusIcon from './googleIcon';
 
 type AuthInfo = {
   userId: string
@@ -175,7 +176,10 @@ const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(authInf
                       Please sign in with your google account to continue. This will allow you to upload and manage your documents, and have personalized interactions with the chatbot.
                       {/* Please Sign in with your Google account to continue. */}
                     </DialogDescription>
-                    <Button className="mt-8" onClick={signInWithGoogle}>Sign In with Google</Button>
+                    <Button className="mt-8" onClick={signInWithGoogle}>
+                      {/* <GoogleplusIcon /> */}
+                      Sign In with Google
+                    </Button>
                   </DialogHeader>
                 </DialogContent>
               </Dialog>
@@ -216,7 +220,75 @@ const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(authInf
 
           <div className="flex flex-col md:flex-row gap-2 mt-3">
             <Button variant="outline" className="flex-1 pt-2 pb-2">Upgrade to Pro</Button>
-            <Button className="flex-1 pt-2 pb-2">Sign in</Button>
+            {/* <Button className="flex-1 pt-2 pb-2">Sign in</Button> */}
+
+            {authInfo?.isAuth ? (
+            // ── Signed in → show avatar with dropdown 
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar className="h-9 w-9 cursor-pointer ring-2 ring-primary/20 hover:ring-primary/60 transition-all">
+                    <AvatarImage src={avatarUrl} alt={authInfo.name} />
+                    <AvatarFallback className="text-sm font-medium">
+                      {getInitials(authInfo.name)}
+                    </AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuGroup>
+                    <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{authInfo.name}</p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        {authInfo.userEmail}
+                      </p>
+                    </div>
+                  </DropdownMenuLabel>
+                  </DropdownMenuGroup>
+                  
+                  <DropdownMenuSeparator />
+
+                  <DropdownMenuSub>
+                    <DropdownMenuSubTrigger>
+                        <SettingsIcon />
+                        Settings
+                    </DropdownMenuSubTrigger>
+                      <DropdownMenuPortal>
+                        <DropdownMenuSubContent>
+                          <DropdownMenuItem>Dark Mode</DropdownMenuItem>
+                        </DropdownMenuSubContent>
+                      </DropdownMenuPortal>
+                  </DropdownMenuSub>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="text-destructive focus:text-destructive cursor-pointer" onClick={handleSignOut}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <>
+                <Button variant="default" onClick={() => setOpen(!open)}>
+                  Sign In
+                </Button>
+                <Dialog open={open} onOpenChange={setOpen}>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Sign in with google</DialogTitle>
+                      <DialogDescription>
+                        Please sign in with your google account to continue. This will allow you to upload and manage your documents, and have personalized interactions with the chatbot.
+                        {/* Please Sign in with your Google account to continue. */}
+                      </DialogDescription>
+                      <Button className="mt-8" onClick={signInWithGoogle}>
+                        {/* <GoogleplusIcon /> */}
+                        Sign In with Google
+                      </Button>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+              </>
+            )
+            }
           </div>
         </div>
       </div>
