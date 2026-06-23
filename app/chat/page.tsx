@@ -29,7 +29,6 @@ import {
   PromptInputTools,
   usePromptInputAttachments,
 } from "@/components/ai-elements/prompt-input";
-import { GlobeIcon } from "lucide-react";
 import { useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import {
@@ -149,23 +148,10 @@ const InputDemo = () => {
             <PromptInputTools>
               <PromptInputActionMenu>
                 <Link href={"/upload"}><PromptInputActionMenuTrigger /></Link>
-                
-                {/* <PromptInputActionMenuContent>
-                  <PromptInputActionAddAttachments />
-                  <PromptInputActionAddScreenshot />
-                </PromptInputActionMenuContent> */}
               </PromptInputActionMenu>
-              {/* <PromptInputButton
-                onClick={() => setUseWebSearch(!useWebSearch)}
-                tooltip={{ content: "Search the web", shortcut: "⌘K" }}
-                variant={useWebSearch ? "default" : "ghost"}
-              >
-                <GlobeIcon size={16} />
-                <span>Search</span>
-              </PromptInputButton> */}
               <PromptInputSelect
                 onValueChange={(value) => {
-                  setModel(value);
+                  setModel(value as string);
                 }}
                 value={model}
               >
