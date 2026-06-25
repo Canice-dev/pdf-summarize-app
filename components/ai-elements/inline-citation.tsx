@@ -22,6 +22,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
 
 export type InlineCitationProps = ComponentProps<"span">;
 
@@ -47,11 +48,19 @@ export const InlineCitationText = ({
   />
 );
 
-export type InlineCitationCardProps = ComponentProps<typeof HoverCard>;
+// export type InlineCitationCardProps = ComponentProps<typeof HoverCard>;
+
+// export const InlineCitationCard = (props: InlineCitationCardProps) => (
+//   <HoverCard closeDelay={0} openDelay={0} {...props} />
+// );
+
+
+export type InlineCitationCardProps = React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Root>;
 
 export const InlineCitationCard = (props: InlineCitationCardProps) => (
-  <HoverCard closeDelay={0} openDelay={0} {...props} />
+  <HoverCardPrimitive.Root closeDelay={0} openDelay={0} {...props} />
 );
+//
 
 export type InlineCitationCardTriggerProps = ComponentProps<typeof Badge> & {
   sources: string[];

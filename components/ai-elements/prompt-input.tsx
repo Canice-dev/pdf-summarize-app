@@ -73,6 +73,7 @@ import {
   useRef,
   useState,
 } from "react";
+import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
 
 // ============================================================================
 // Helpers
@@ -428,11 +429,11 @@ export const PromptInputActionAddAttachments = ({
     [attachments]
   );
 
-  return (
-    <DropdownMenuItem {...props} onSelect={handleSelect}>
-      <ImageIcon className="mr-2 size-4" /> {label}
-    </DropdownMenuItem>
-  );
+  // return (
+  //   <DropdownMenuItem {...props} onSelect={handleSelect}>
+  //     <ImageIcon className="mr-2 size-4" /> {label}
+  //   </DropdownMenuItem>
+  // );
 };
 
 export type PromptInputActionAddScreenshotProps = ComponentProps<
@@ -448,37 +449,37 @@ export const PromptInputActionAddScreenshot = ({
 }: PromptInputActionAddScreenshotProps) => {
   const attachments = usePromptInputAttachments();
 
-  const handleSelect = useCallback(
-    async (event: Event) => {
-      onSelect?.(event);
-      if (event.defaultPrevented) {
-        return;
-      }
+  // const handleSelect = useCallback(
+  //   async (event: Event) => {
+  //     onSelect?.(event);
+  //     if (event.defaultPrevented) {
+  //       return;
+  //     }
 
-      try {
-        const screenshot = await captureScreenshot();
-        if (screenshot) {
-          attachments.add([screenshot]);
-        }
-      } catch (error) {
-        if (
-          error instanceof DOMException &&
-          (error.name === "NotAllowedError" || error.name === "AbortError")
-        ) {
-          return;
-        }
-        throw error;
-      }
-    },
-    [onSelect, attachments]
-  );
+  //     try {
+  //       const screenshot = await captureScreenshot();
+  //       if (screenshot) {
+  //         attachments.add([screenshot]);
+  //       }
+  //     } catch (error) {
+  //       if (
+  //         error instanceof DOMException &&
+  //         (error.name === "NotAllowedError" || error.name === "AbortError")
+  //       ) {
+  //         return;
+  //       }
+  //       throw error;
+  //     }
+  //   },
+  //   [onSelect, attachments]
+  // );
 
-  return (
-    <DropdownMenuItem {...props} onSelect={handleSelect}>
-      <Monitor className="mr-2 size-4" />
-      {label}
-    </DropdownMenuItem>
-  );
+  // return (
+  //   <DropdownMenuItem {...props} onSelect={handleSelect}>
+  //     <Monitor className="mr-2 size-4" />
+  //     {label}
+  //   </DropdownMenuItem>
+  // );
 };
 
 export interface PromptInputMessage {
@@ -1238,7 +1239,7 @@ export const PromptInputSubmit = ({
         onStop();
         return;
       }
-      onClick?.(e);
+      onClick?.(e as any); //as any
     },
     [isGenerating, onStop, onClick]
   );
@@ -1311,16 +1312,26 @@ export const PromptInputSelectValue = ({
   <SelectValue className={cn(className)} {...props} />
 );
 
-export type PromptInputHoverCardProps = ComponentProps<typeof HoverCard>;
+// export type PromptInputHoverCardProps = ComponentProps<typeof HoverCard>;
+
+// export const PromptInputHoverCard = ({
+//   openDelay = 0,
+//   closeDelay = 0,
+//   ...props
+// }: PromptInputHoverCardProps) => (
+//   <HoverCard closeDelay={closeDelay} openDelay={openDelay} {...props} />
+// );
+
+export type PromptInputHoverCardProps = React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Root>;
 
 export const PromptInputHoverCard = ({
   openDelay = 0,
   closeDelay = 0,
   ...props
 }: PromptInputHoverCardProps) => (
-  <HoverCard closeDelay={closeDelay} openDelay={openDelay} {...props} />
+  <HoverCardPrimitive.Root closeDelay={closeDelay} openDelay={openDelay} {...props} />
 );
-
+//
 export type PromptInputHoverCardTriggerProps = ComponentProps<
   typeof HoverCardTrigger
 >;
