@@ -12,6 +12,9 @@ import type { LanguageModelUsage } from "ai";
 import type { ComponentProps } from "react";
 import { createContext, useContext, useMemo } from "react";
 import { getUsage } from "tokenlens";
+//new import
+import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
+
 
 const PERCENT_MAX = 100;
 const ICON_RADIUS = 10;
@@ -40,7 +43,9 @@ const useContextValue = () => {
   return context;
 };
 
-export type ContextProps = ComponentProps<typeof HoverCard> & ContextSchema;
+// export type ContextProps = ComponentProps<typeof HoverCard> & ContextSchema;
+export type ContextProps = React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Root> & ContextSchema;
+
 
 export const Context = ({
   usedTokens,
@@ -56,7 +61,8 @@ export const Context = ({
 
   return (
     <ContextContext.Provider value={contextValue}>
-      <HoverCard closeDelay={0} openDelay={0} {...props} />
+      {/* <HoverCard closeDelay={0} openDelay={0} {...props} /> */}
+      <HoverCardPrimitive.Root closeDelay={0} openDelay={0} {...props} />
     </ContextContext.Provider>
   );
 };
