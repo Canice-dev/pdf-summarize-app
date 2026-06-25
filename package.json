@@ -15,6 +15,7 @@
     "@google/genai": "^2.0.0",
     "@langchain/textsplitters": "^1.0.1",
     "@neondatabase/serverless": "^1.1.0",
+    "@radix-ui/react-hover-card": "^1.1.17",
     "@radix-ui/react-use-controllable-state": "^1.2.3",
     "@rive-app/react-webgl2": "^4.29.1",
     "@streamdown/cjk": "^1.0.3",

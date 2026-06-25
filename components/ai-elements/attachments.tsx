@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 import type { ComponentProps, HTMLAttributes, ReactNode } from "react";
 import { createContext, useCallback, useContext, useMemo } from "react";
+import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
+
 
 
 // ============================================================================
@@ -370,11 +372,6 @@ export const AttachmentRemove = ({
 // AttachmentHoverCard - Hover preview
 // ============================================================================
 
-export type AttachmentHoverCardProps = ComponentProps<typeof HoverCard> & {
-  openDelay?: number;
-  closeDelay?: number;
-};
-
 
 // export type AttachmentHoverCardProps = ComponentProps<typeof HoverCard>;
 
@@ -385,6 +382,20 @@ export type AttachmentHoverCardProps = ComponentProps<typeof HoverCard> & {
 // }: AttachmentHoverCardProps) => (
 //   <HoverCard closeDelay={closeDelay} openDelay={openDelay} {...props} />
 // );
+
+
+export type AttachmentHoverCardProps = React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Root>;
+
+export const AttachmentHoverCard = ({
+  openDelay = 0,
+  closeDelay = 0,
+  ...props
+}: AttachmentHoverCardProps) => (
+  // <HoverCard closeDelay={closeDelay} openDelay={openDelay} {...props} />
+  <HoverCardPrimitive.Root closeDelay={closeDelay} openDelay={openDelay} {...props} />
+);
+//
+
 
 export type AttachmentHoverCardTriggerProps = ComponentProps<
   typeof HoverCardTrigger
