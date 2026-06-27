@@ -207,15 +207,15 @@ const SummarizePage = () => {
       </div>
 
       {/* Button */}
-      <button
+      <Button
         // onClick={handleSummarize}
         // disabled={loading || !inputText.trim()}
-        className=" bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 disabled:opacity-50 transition-all"
+        // className=" bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 disabled:opacity-50 transition-all"
         disabled={loading}
         onClick={generateSummary}
       >
         {loading ? "Generating..." : "Generate Summary"} 
-      </button>
+      </Button>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>

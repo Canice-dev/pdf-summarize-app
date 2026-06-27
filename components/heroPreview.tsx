@@ -144,6 +144,7 @@ function TypingDots() {
         <span
           key={i}
           style={{
+            // color: "#0a0d16",
             width: 5,
             height: 5,
             borderRadius: "50%",
@@ -547,7 +548,7 @@ const HeroPreview = () => {
               </div>
               {summaryPoints.map((pt) => (
                 <div
-                  // key={i}
+                  key={pt.text}
                   style={{
                     // display: "start",
                     textAlign: "start",

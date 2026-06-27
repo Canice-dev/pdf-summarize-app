@@ -42,6 +42,8 @@ import {
   MessageResponse,
 } from "@/components/ai-elements/message";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowUp, MoveUp } from "lucide-react";
 // import PDFUpload from "./upload/page";
 
 const PromptInputAttachmentsDisplay = () => {

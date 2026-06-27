@@ -90,12 +90,12 @@ const Home = () => {
               SUMMARIZE TEXT
             </h3>
             {/* text-muted-foreground for lighter texts */}
-            <p className='text-sm leading-relaxed'>
+            <p className='text-sm leading-relaxed mb-8'>
               Extract the key points from any text in seconds.<br/>Get the gist of any text in seconds.
             </p>
             <Link href="/summarize">
-              <Button className='mt-8 px-6 py-4 '>
-                Summarize Text
+              <Button>
+                Summarize
                 <ArrowRight size={13} />
               </Button>
             </Link>
@@ -112,7 +112,7 @@ const Home = () => {
             </p>
             <Link href='/summarizePdf'>
               <Button className='mt-8 px-6 py-4 '>
-                Summarize PDF
+                Summarize
                 <ArrowRight size={13} />
               </Button>
             </Link>
@@ -129,7 +129,7 @@ const Home = () => {
             </p>
             <Link href='/chat'>
               <Button className='mt-8 px-6 py-4 '>
-                Chat with PDF
+                Chat
                 <ArrowRight size={13} />
               </Button>
             </Link>
