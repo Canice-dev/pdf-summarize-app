@@ -102,7 +102,7 @@ const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(authInf
         <div className="text-lg font-semibold">
           <Link href="/" className='flex'>
             <BrandIcon />
-            Study<span>Flow</span>
+            {/* Study<span>Flow</span> */}
           </Link>
         </div>
 

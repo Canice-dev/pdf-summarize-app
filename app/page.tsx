@@ -1,23 +1,20 @@
 import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import PDFUpload from '@/components/pdfUpload'
-import page from './summarize/page'
-import { ArrowRight, BookOpen, FileArchive, FileText, FileTextIcon, GitMerge, MessageCircle, PenLine } from 'lucide-react'
+import { ArrowRight, BookOpen, FileText, FileTextIcon, Globe, Lock, MessageCircle, PenLine } from 'lucide-react'
 import FaqSection from '@/components/faqSection'
 import CtaBanner from '@/components/ctaBanner'
 import HowitWorks from '@/components/howItWorks'
-import Footer from '@/components/footer'
-import SubFooter from '@/components/subFooter'
 import HeroPreview from '@/components/heroPreview'
+import { instrumentSerif } from './layout'
 
 
 const tools = [
-  { icon: FileText, label: "Summarize" },
+  { icon: FileText, label: "AI summarization" },
   { icon: MessageCircle, label: "Chat with PDF" },
-  { icon: GitMerge, label: "Merge" },
-  { icon: FileArchive, label: "Compress" },
-  { icon: PenLine, label: "Sign in" },
+  { icon: Globe, label: "Real-time web search" },
+  { icon: Lock, label: "End-to-end encrypted" },
+  { icon: PenLine, label: "5+ PDF tools" },
 ];
 
 
@@ -26,9 +23,12 @@ const Home = () => {
     <div className='px-4 md:px-12 flex flex-col justify-center items-center min-h-[85vh] relative mx-auto text-center'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4 p-5'>
         <div className='text-left'>
-          <h1 className='text-2xl md:text-[70px] lg:text-{78px] max-w-4xl'>Turn PDFs into Intelligent Conversations
+          <h1 className='text-2xl md:text-[70px] lg:text-{78px] max-w-4xl'>Turn PDFs into <span className={`block ${instrumentSerif.variable} font-serif italic text-[#1B3A6B]`}
+          style={{ fontFamily: "var(--font-instrument)" }}>
+            Intelligent Conversations
+          </span> 
           </h1>
-          <p className='text-md mt-2 md:text-base mb-8 max-w-4xl'>Sumpdf enables you to summarize documents, extract valuable insights, and chat with your PDFs using AI. Upload your files, ask questions, and receive intelligent answers powered by your documents and enhanced with real-time web search.</p>
+          <p className='text-md mt-2 md:text-base mb-8 max-w-4xl'>StudyFlow enables you to summarize documents, extract valuable insights, and chat with your PDFs using AI. Upload your files, ask questions, and receive intelligent answers from your documents and enhanced with real-time web search, if answers are not found in your document.</p>
           <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8 mb-10'>
             <section className="flex flex-col gap-1 border-r px-3">
               <h4 className="text-sm font-semibold">5+ PDF Tools</h4>

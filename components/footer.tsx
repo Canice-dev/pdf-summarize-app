@@ -7,7 +7,7 @@ const footer = () => {
   return (
     <div className='grid grid-cols-1 md:grid-cols-3 text-left gap-4 p-5 bg-zinc-950 text-white px-8'>
       <div className='text-left'>
-        <h3 className='text-[15px] font-semibold mb-3'>SumPDF</h3>
+        <h3 className='text-[15px] font-semibold mb-3'>StudyFlow</h3>
         <p>AI-powered academic platform for everyone. Summarize text, Summarize PDF, and chat with <br /> PDFs all in one place.</p>
         <div className="gap-1.5 text-[12px] px-3 py-1.5 rounded-full border border w-fit mt-4 cursor-default">
           All systems operational

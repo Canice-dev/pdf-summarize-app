@@ -5,8 +5,8 @@ import { ChevronDown, Plus } from "lucide-react";
 
 const faqs = [
   {
-    q: "What file types does SumPDF support?",
-    a: "SumPDF works with PDF files of any size. Support for Word documents (.docx) and plain text files.",
+    q: "What file types does StudyFlow support?",
+    a: "StudyFlow works with PDF files of any size. Support for Word documents (.docx) and plain text files.",
   },
   {
     q: "How does the AI summarization work?",
@@ -25,7 +25,7 @@ const faqs = [
     a: "Free accounts can upload PDFs up to 10MB. Pro accounts support files up to 100MB with no page count limit.",
   },
   {
-    q: "Do I need an account to use SumPDF?",
+    q: "Do I need an account to use StudyFlow?",
     a: " Yes you need an account so your documents can be save in your database server. Sign up for free to save summaries, access chat, and unlock more tools.",
   },
 ];

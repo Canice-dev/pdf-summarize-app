@@ -18,8 +18,8 @@ const SubFooter = () => {
         {/* top panel content (SumPDF / Products / Get in touch) */}
         
         <div className="flex items-center justify-between py-6">
-          <p className="text-white">SumPDF</p>
-          <p className="text-white">© 2026 SumPDF. All rights reserved.</p>
+          <p className="text-white">StudyFlow</p>
+          <p className="text-white">© 2026 StudyFlow. All rights reserved.</p>
         </div>
       </div>
     </footer>
